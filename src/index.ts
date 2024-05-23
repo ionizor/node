@@ -1,11 +1,11 @@
 import panel from "@/globals/panel"
-import { string } from "@rjweb/utils"
+import { string, system } from "@rjweb/utils"
 import env from "@/globals/env"
 import logger from "@/globals/logger"
 import fs from "fs"
 
 export default function getVersion() {
-	return `${JSON.parse(fs.readFileSync('../package.json', 'utf8')).version}:${/*system.execute('git rev-parse --short=10 HEAD').trim()*/69}`
+	return `${JSON.parse(fs.readFileSync('../package.json', 'utf8')).version}:${system.execute('git rev-parse --short=10 HEAD').trim()}`
 }
 
 logger()
