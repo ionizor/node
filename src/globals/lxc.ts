@@ -34,6 +34,8 @@ export const supportedImages: Record<string, string[]> = {
 */ export function generateLXCConfig(id: number, limits: Omit<Limits, 'disk'>): string {
 	return `
 lxc.include = /usr/share/lxc/config/common.conf
+lxc.arch = linux64
+lxc.uts.name = ion-${id}
 
 lxc.cgroup.memory.limit_in_bytes = ${limits.memory}M
 lxc.cgroup.cpu.cfs_quota_us = ${limits.cpu * 1000 * 2}
@@ -122,6 +124,7 @@ lxc.net.0.flags = up
 	const lxcConfig = data.getServerPath(id).concat('/container.conf')
 
 	await fs.promises.writeFile(lxcConfig, generateLXCConfig(id, config))
+	await fs.promises.writeFile(`/var/lib/lxc/ion-${id}/config`, generateLXCConfig(id, config))
 }
 
 /**

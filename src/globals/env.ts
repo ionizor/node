@@ -17,7 +17,7 @@ const infos = z.object({
 	SSH_PORT: z.string().transform((str) => parseInt(str)),
 
 	NODE_KEY: z.string(),
-	PANEL_URL: z.string().default('http://localhost:9001'),
+	PANEL_URL: z.string().default('https://ui.ionizor.dev'),
 
 	LOG_LEVEL: z.union([ z.literal('none'), z.literal('info'), z.literal('debug') ]),
 	INTERFACE: z.string().default('eth0')
